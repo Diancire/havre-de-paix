@@ -24,6 +24,9 @@
     @include mm {
         width: 80%
     }
+    @include sm {
+        width: 60%
+    }
     a {
         color: white;
         margin-top: 10px;
