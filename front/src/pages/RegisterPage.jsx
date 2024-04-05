@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import { IoCloudUpload } from "react-icons/io5";
 
 
@@ -23,10 +24,46 @@ const RegisterPage = () => {
 
   console.log(formData);
 
+  const [passwordMatch, setPasswordMatch] = useState(true)
+
+  useEffect(() => {
+    setPasswordMatch(formData.password === formData.confirmPassword || formData.confirmPassword === "")
+  }, [formData.password, formData.confirmPassword])
+
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if(formData.password === formData.confirmPassword) {
+      setPasswordMatch(true)
+    } else {
+      setPasswordMatch(false)
+    }
+
+    try {
+      const register_form = new FormData()
+
+      for(var key in formData) {
+        register_form.append(key, formData[key])
+      }
+
+      const response = await fetch("http://localhost:3001/auth/register", {
+        method: "POST",
+        body: register_form
+      })
+      if(response.ok) {
+        navigate("/login")
+      }
+     } catch (err) {
+      console.log("L'inscription a échoué", err.message);
+     }
+  }
+
   return (
     <div className='register'>
         <div className='register_content'>
-            <form>
+            <form onSubmit={handleSubmit}>
               <input 
                 type="text"
                 placeholder='Nom'
@@ -59,6 +96,9 @@ const RegisterPage = () => {
                 onChange={handleChange}
                 required 
               />
+              {!passwordMatch && (
+                <p style={{color: "red"}}>Les mots de passe ne correspondent pas.</p>
+              )}
               <input 
                 type="password"
                 placeholder='Confirmez le mot de passe'
@@ -87,7 +127,7 @@ const RegisterPage = () => {
                   style={{ maxWidth: "80px"}}
                 />
               )}
-              <button type='submit'>S'inscrire</button>
+              <button type='submit' disabled={!passwordMatch}>S'inscrire</button>
             </form>
             <a href='/login'>Vous avez déjà un compte ? Connectez-vous ici</a>
         </div>
