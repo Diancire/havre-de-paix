@@ -1,6 +1,6 @@
 .register {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,6 +17,7 @@
     padding: 40px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 20px;
+    margin: 20px 0;
     @include lg {
         width: 60%
     }
@@ -25,7 +26,7 @@
         width: 80%
     }
     @include sm {
-        width: 60%
+        width: 60%;
     }
     a {
         color: white;
@@ -38,7 +39,7 @@
       }
 }
 
-form {
+.register_form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,7 +49,7 @@ form {
         padding: 7px 15px;
         background-color: transparent;
         border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid $darkgrey;
         outline: none;
         text-align: center;
         color: white;
@@ -85,4 +86,37 @@ form {
             color:#32A65A;
         }
       }
+}
+
+.register_form-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid $darkgrey;
+    padding: 7px 15px;
+    input {
+        border-bottom: none;
+    }
+    span {
+        color: $darkgrey;
+        cursor: pointer;
+    }
+}
+
+.register_form_content-validation-mdp {
+    width: 100%;
+    color: $white;
+    ul {
+        li {
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            svg {
+                padding:0 5px;
+            }
+        }
+        .validated {
+            color: $darkgrey;
+        }
+    }
 }

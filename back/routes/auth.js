@@ -18,6 +18,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
+const passwordRegex = {
+    minLength: /^(?=.*\S).{12,}$/,
+    digit: /^(?=.*\d).+$/,
+    uppercase: /^(?=.*[A-Z]).+$/,
+    lowercase: /^(?=.*[a-z]).+$/,
+    specialChar: /^(?=.*[-+!*$@%_#]).+$/,
+}
+
 /* USER REGISTER */
 router.post("/register", upload.single('profileImage'), async (req, res) => {
     try {
@@ -27,7 +35,7 @@ router.post("/register", upload.single('profileImage'), async (req, res) => {
         const profileImage = req.file
 
         if(!profileImage) {
-            return res.status(400).send("No file uploaded")
+            return res.status(400).send("Aucun fichier téléchargé")
         }
 
         /* path to the uploaded profile photo  */
@@ -37,6 +45,19 @@ router.post("/register", upload.single('profileImage'), async (req, res) => {
         const existingUser = await User.findOne({ email })
         if (existingUser) {
             return res.status(409).json({ message: "L'utilisateur existe déjà"})
+        }
+
+        /* checking password criteria */
+        if(
+            !passwordRegex.minLength.test(password) ||
+            !passwordRegex.digit.test(password) ||
+            !passwordRegex.uppercase.test(password) ||
+            !passwordRegex.lowercase.test(password) ||
+            !passwordRegex.specialChar.test(password)
+        ) {
+            return res.status(400).json({
+                message:"Le mot de passe ne respecte pas les critères de sécurité."
+            });
         }
 
         /* hass the password */
@@ -56,10 +77,10 @@ router.post("/register", upload.single('profileImage'), async (req, res) => {
         await newUser.save()
 
         /* Send a successful message */
-        res.status(200).json({ message: "user registered successfully", user: newUser })
+        res.status(200).json({ message: "Inscription réussie", user: newUser })
     } catch (err) {
         console.log(err)
-        res.status(500).json({ message: "registration failed", error: err.message})
+        res.status(500).json({ message: "Échec de l'inscription", error: err.message})
     }
 })
 
