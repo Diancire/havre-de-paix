@@ -1,0 +1,122 @@
+.register {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: url("../../../public/assets/register.jpg") center;
+    background-size: cover;
+}
+
+.register_content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 40%;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    margin: 20px 0;
+    @include lg {
+        width: 60%
+    }
+
+    @include mm {
+        width: 80%
+    }
+    @include sm {
+        width: 60%;
+    }
+    a {
+        color: white;
+        margin-top: 10px;
+        text-align: center;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+}
+
+.register_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    input {
+        width: 100%;
+        padding: 7px 15px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $darkgrey;
+        outline: none;
+        text-align: center;
+        color: white;
+
+        input:not(:placeholder-shown):focus {
+            background: transparent;
+        }
+        &::placeholder {
+            font-size: 16px;
+            color: white;
+        }
+    }
+    label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 9px;
+        cursor: pointer;
+        color: white;
+        svg {
+            font-size: 50px;
+        }
+    }
+    button {
+        margin-top: 15px;
+        color: $white;
+        background-color:#32A65A;
+        @include btn;
+        width: 50%;
+
+        &:hover {
+            background-color: #C1E4CD;
+            color:#32A65A;
+        }
+      }
+}
+
+.register_form-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid $darkgrey;
+    padding: 7px 15px;
+    input {
+        border-bottom: none;
+    }
+    span {
+        color: $darkgrey;
+        cursor: pointer;
+    }
+}
+
+.register_form_content-validation-mdp {
+    width: 100%;
+    color: $white;
+    ul {
+        li {
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            svg {
+                padding:0 5px;
+            }
+        }
+        .validated {
+            color: $darkgrey;
+        }
+    }
+}
