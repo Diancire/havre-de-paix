@@ -79,8 +79,6 @@
         color: $white;
         background-color:#32A65A;
         @include btn;
-        width: 50%;
-
         &:hover {
             background-color: #C1E4CD;
             color:#32A65A;

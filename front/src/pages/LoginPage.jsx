@@ -8,6 +8,7 @@ export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState("password");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Initializing useDispatch to dispatch Redux actions
   const dispatch = useDispatch()
@@ -50,6 +51,7 @@ export const LoginPage = () => {
 
     } catch(err) {
       console.log("La connexion a échoué", err.message);
+      setErrorMessage("Adresse email et/ou mot de passe invalides");
     }
   }
 
@@ -86,9 +88,10 @@ export const LoginPage = () => {
                 )
               }
           </div>
+          {errorMessage && <p className="form_message-error">{errorMessage}</p>}
           <button type='submit'>Se connecter</button>
         </form>
-        <a href="/register">Vous n'avez pas de compte ? Se connecter ici</a>
+        <a href="/register">Vous n'avez pas de compte ? S'inscrire</a>
       </div>
     </div>
   )
