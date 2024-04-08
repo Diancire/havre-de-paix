@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import { IoCloudUpload, IoRadioButtonOff } from "react-icons/io5";
 import { BsEye, BsEyeSlash, BsCheck2Circle  } from "react-icons/bs";
+import { toast } from 'react-toastify';
 
 
 const RegisterPage = () => {
@@ -65,6 +66,7 @@ const RegisterPage = () => {
         body: register_form
       })
       if(response.ok) {
+        toast.success('Inscription réussie ! Vous pouvez maintenant vous connecter.');
         navigate("/login")
       }
      } catch (err) {
