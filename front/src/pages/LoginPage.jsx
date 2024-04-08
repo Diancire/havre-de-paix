@@ -50,7 +50,6 @@ export const LoginPage = () => {
       }
 
     } catch(err) {
-      console.log("La connexion a échoué", err.message);
       setErrorMessage("Adresse email et/ou mot de passe invalides");
     }
   }
