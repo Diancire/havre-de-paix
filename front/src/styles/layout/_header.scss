@@ -1,0 +1,101 @@
+.header_container {
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    @include sm {
+        padding: 10px 20px;
+    }
+}
+
+.header_search {
+    display: flex;
+    align-items: center;
+    input {
+        gap: 40px;
+        border: 1px solid $grey;
+        border-radius: 10px;
+        height: 50px;
+        min-width: 200px;
+        padding: 0 20px;
+        outline: none;
+        margin-right: 10px;
+        &:focus {
+            outline: 2px solid $primary-color-green;
+            border: none;
+        }
+    }
+    svg {
+        color: $darkgrey;
+        font-size: 20px;
+        &:hover {
+            color: $accent-color-green-nuance-normal;
+        }
+    }
+    @include sm {
+        display: none;
+    }
+}
+
+.header_navbar_right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    a {
+        font-weight: 700;
+        cursor: pointer;
+        color: $text-gray;
+        &:hover {
+            color: $accent-color-green-nuance-normal;
+        }
+    }
+    .header_navbar_right_account {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        border: 1px solid $grey;
+        border-radius: 30px;
+        display: flex;
+        gap: 10px;
+        background-color: $white;
+        &:hover {
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        svg {
+            color: $darkgrey;
+            font-size: 20px;
+            &:hover {
+                color: $accent-color-green-nuance-normal;
+            }
+        }
+
+    }
+}
+
+.header_navbar_right-accountmenu {
+    position: absolute;
+    background-color: $white;
+    right: 60px;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding: 10px 0;
+    border: 1px solid $lightgrey;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    a {
+        width: 100%;
+        padding: 8px 15px;
+        color: $text-gray;
+        font-weight: 700;
+    }
+}
