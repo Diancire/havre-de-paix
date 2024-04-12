@@ -1,0 +1,12 @@
+.slide_container {
+    width: 100vw;
+    height: 80vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../public/assets/slide.jpg");
+    background-size: cover;
+    background-position: center;
+    h1 {
+        text-align: center;
+        padding: 200px 20px;
+        color: white;
+    }
+}
