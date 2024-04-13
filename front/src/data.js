@@ -14,11 +14,17 @@ import {
 import {
     FaSkiing,
 } from "react-icons/fa";
+import { 
+    FaHouseUser,
+    FaPeopleRoof,
+} from "react-icons/fa6";
 import {
     BiWorld,
 } from "react-icons/bi";
 import { 
-    BsSnow } from "react-icons/bs";
+    BsSnow,
+    BsFillDoorOpenFill,
+} from "react-icons/bs";
 import { 
     IoDiamond } from "react-icons/io5";
 import { 
@@ -120,3 +126,23 @@ export const categories = [
         description: "Cette propriété est neuve et luxueuse !",
     },
 ];
+
+export const types = [
+    {
+      name: "Un logement entier",
+      description: "Les invités ont tout le logement pour eux-mêmes.",
+      icon: <FaHouseUser />,
+    },
+    {
+      name: "Une ou plusieurs chambres",
+      description:
+        "Les invités ont leur propre chambre dans une maison, avec accès aux espaces partagés.",
+      icon: <BsFillDoorOpenFill />,
+    },
+    {
+      name: "Une chambre partagée",
+      description:
+        "Les invités dorment dans une chambre ou un espace commun qui peut être partagé avec vous ou d'autres personnes.",
+      icon: <FaPeopleRoof />,
+    },
+  ];
