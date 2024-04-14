@@ -1,5 +1,7 @@
 import {
-    TbBeach, TbMountain, TbPool 
+    TbBeach,
+    TbMountain,
+    TbPool 
 } from "react-icons/tb";
 import {
     GiBarn,
@@ -13,22 +15,51 @@ import {
 } from "react-icons/gi";
 import {
     FaSkiing,
+    FaPumpSoap,
+    FaShower,
+    FaFireExtinguisher,
+    FaUmbrellaBeach,
 } from "react-icons/fa";
-import { 
+import {
     FaHouseUser,
     FaPeopleRoof,
+    FaKitchenSet
 } from "react-icons/fa6";
 import {
+    BiSolidWasher,
+    BiSolidDryer,
+    BiSolidFirstAid,
+    BiWifi,
+    BiSolidFridge,
     BiWorld,
 } from "react-icons/bi";
-import { 
+import {
     BsSnow,
     BsFillDoorOpenFill,
+    BsPersonWorkspace
 } from "react-icons/bs";
-import { 
-    IoDiamond } from "react-icons/io5";
-import { 
-    MdOutlineVilla } from "react-icons/md";
+import { IoDiamond } from "react-icons/io5";
+import {
+    MdOutlineVilla,
+    MdMicrowave,
+    MdBalcony,
+    MdYard,
+    MdPets
+} from "react-icons/md";
+import {
+    PiBathtubFill,
+    PiCoatHangerFill,
+    PiTelevisionFill,
+} from "react-icons/pi";
+import { TbIroning3 } from "react-icons/tb";
+import {
+    GiHeatHaze,
+    GiCctvCamera,
+    GiBarbecue,
+    GiToaster,
+    GiCampfire,
+} from "react-icons/gi";
+import { AiFillCar } from "react-icons/ai";
 
 export const categories = [
     {
@@ -145,4 +176,111 @@ export const types = [
         "Les invités dorment dans une chambre ou un espace commun qui peut être partagé avec vous ou d'autres personnes.",
       icon: <FaPeopleRoof />,
     },
-  ];
+];
+
+export const equipments = [
+    {
+        name: "Baignoire",
+        icon: <PiBathtubFill />,
+    },
+    {
+        name: "Produits de soins personnels",
+        icon: <FaPumpSoap />,
+    },
+    {
+        name: "Douche extérieure",
+        icon: <FaShower />,
+    },
+    {
+        name: "Lave-linge",
+        icon: <BiSolidWasher />,
+    },
+    {
+        name: "Sèche-linge",
+        icon: <BiSolidDryer />,
+    },
+    {
+        name: "Cintres",
+        icon: <PiCoatHangerFill />,
+    },
+    {
+        name: "Fer à repasser",
+        icon: <TbIroning3 />,
+    },
+    {
+        name: "Télévision",
+        icon: <PiTelevisionFill />,
+    },
+    {
+        name: "Espace de travail dédié",
+        icon: <BsPersonWorkspace />
+    },
+    {
+        name: "Climatisation",
+        icon: <BsSnow />,
+    },
+    {
+        name: "Chauffage",
+        icon: <GiHeatHaze />,
+    },
+    {
+        name: "Caméras de sécurité",
+        icon: <GiCctvCamera />,
+    },
+    {
+        name: "Extincteur",
+        icon: <FaFireExtinguisher />,
+    },
+    {
+        name: "Trousse de premiers secours",
+        icon: <BiSolidFirstAid />,
+    },
+    {
+        name: "Wifi",
+        icon: <BiWifi />,
+    },
+    {
+        name: "Ustensiles de cuisine",
+        icon: <FaKitchenSet />,
+    },
+    {
+        name: "Réfrigérateur",
+        icon: <BiSolidFridge />,
+    },
+    {
+        name: "Micro-ondes",
+        icon: <MdMicrowave />,
+    },
+    {
+        name: "Cuisinière",
+        icon: <GiToaster />,
+    },
+    {
+        name: "Grill barbecue",
+        icon: <GiBarbecue />,
+    },
+    {
+        name: "Espace repas extérieur",
+        icon: <FaUmbrellaBeach />,
+    },
+    {
+        name: "Balcon",
+        icon: <MdBalcony />,
+    },
+    {
+        name: "Feu de camp",
+        icon: <GiCampfire />,
+    },
+    {
+        name: "Jardin",
+        icon: <MdYard />,
+    },
+    {
+        name: "Parking gratuit",
+        icon: <AiFillCar />,
+    },
+    {
+        name: "Animaux acceptés",
+        icon: <MdPets />
+    }
+];
