@@ -9,7 +9,7 @@ const User = require("../models/User")
 /* Configuration Multer for file upload */
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/uploads/") // Store uploaded files in the 'uploads folder
+        cb(null, "public/uploads/profile") // Store uploaded files in the 'uploads folder
     },
     filename: function(req, file, cb) {
         cb(null, file.originalname) // Use the original file name

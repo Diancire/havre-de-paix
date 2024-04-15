@@ -3,12 +3,13 @@ import Header from '../components/Header'
 import { categories, types, equipments } from '../data'
 import { IoMdRemoveCircleOutline, IoMdAddCircleOutline, IoIosImages, IoIosTrash} from "react-icons/io"
 import { DragDropContext, Draggable, Droppable} from "react-beautiful-dnd"
+import { useSelector} from "react-redux"
+import { useNavigate } from 'react-router-dom'
 
 function CreateListing() {
 
     const [category, setCategory] = useState("")
     const [type, setType] = useState("")
-    const [equipment, setEquipment] = useState([])
 
     // Location 
     const [formLocation, setFormLocation] = useState({
@@ -32,6 +33,17 @@ function CreateListing() {
     const [bedroomCount, setBedroomCount] = useState(1)
     const [bedCount, setBedCount] = useState(1)
     const [bathroomCount, setBathroomCount] = useState(1)
+
+    // Equipments
+    const [amenities, setAmenities] = useState([]);
+
+    const handleSelectAmenities = (equipment) => {
+        if(amenities.includes(equipment)) {
+            setAmenities((prevAmenities) => prevAmenities.filter((option) => option !== equipment))
+        } else {
+            setAmenities((prev) => [...prev, equipment])
+        }
+    }
 
     // Upload, Drag & Drop, Remove photos
     const [photos, setPhotos] = useState([])
@@ -57,12 +69,71 @@ function CreateListing() {
         );
     };
 
+    const [formDescription, setFormDescritpion] = useState({
+        title: "",
+        description:"",
+        price: 0,
+    })
+
+    const handleChangeDescription = (e) => {
+        const { name, value } = e.target
+        setFormDescritpion({
+            ...formDescription,
+            [name]: value,
+        })
+    }
+
+    const creatorId = useSelector((state) => state.user._id)
+
+    const navigate = useNavigate()
+
+    const handlePost = async (e) => {
+        e.preventDefault()
+
+        try {
+            /* Create a new formData object to handle file uploads */
+            const listingForm = new FormData()
+            listingForm.append("creator", creatorId)
+            listingForm.append("category", category)
+            listingForm.append("type", type)
+            listingForm.append("adress", formLocation.adress)
+            listingForm.append("postalCode", formLocation.postalCode)
+            listingForm.append("city", formLocation.city)
+            listingForm.append("region", formLocation.region)
+            listingForm.append("country", formLocation.country)
+            listingForm.append("guestCount", guestCount)
+            listingForm.append("bedroomCount", bedroomCount)
+            listingForm.append("bedCount", bedCount)
+            listingForm.append("bathroomCount", bathroomCount)
+            listingForm.append("amenities", amenities)
+            listingForm.append("title", formDescription.title)
+            listingForm.append("description", formDescription.description)
+            listingForm.append("price", formDescription.price)
+
+            /* Append each selected photos to the FormData object */
+            photos.forEach((photo) => {
+                listingForm.append("listingPhotos", photo)
+            })
+
+            /* Send a POST request to server */
+            const response = await fetch("http://localhost:3001/properties/create", {
+                method: "POST",
+                body: listingForm
+            })
+            if(response.ok) {
+                navigate("/")
+            }
+        } catch (err) {
+            console.log("Publish listing failed", err.message);
+        }
+    }
+
   return (
     <>
         <Header/>
         <div className='create_listing_container'>
             <h1>Publiez votre annonce</h1>
-            <form action="">
+            <form onSubmit={handlePost}>
                 <div className='create_listing-step-1'>
                     <h2>Étape 1 : Décrivez votre logement</h2>
                     <h3>Parmi ces catégories, laquelle décrit le mieux votre logement ?</h3>
@@ -217,9 +288,9 @@ function CreateListing() {
                     <div className='create_listing-step-2-equipments'>
                         {equipments?.map((item, index) => (
                             <div 
-                                className={`create_listing-step-2-equipments-item ${equipment === item.label ? "selected" : ""}`}
+                                className={`create_listing-step-2-equipments-item ${amenities.includes(item.name) ? "selected" : ""}`}
                                 key={index}
-                                onClick={() => setEquipment(item.label)}
+                                onClick={() => handleSelectAmenities(item.name)}
                             >
                                 <div className='create_listing-step-2-equipments-item-icon'>{item.icon}</div>
                                 <p className='create_listing-step-2-equipments-item-text'>{item.name}</p>
@@ -291,12 +362,16 @@ function CreateListing() {
                             type="text" 
                             name="title" 
                             placeholder='Titre'
+                            value={formDescription.value}
+                            onChange={handleChangeDescription}
                             required
                         />
                         <p>Description</p>
                         <textarea
                             name="description" 
                             placeholder='Description' 
+                            value={formDescription.description}
+                            onChange={handleChangeDescription}
                             required
                         />
                         <p>Prix / €</p>
@@ -304,10 +379,15 @@ function CreateListing() {
                             type="number"
                             placeholder='100' 
                             name='price'
+                            value={formDescription.price}
+                            onChange={handleChangeDescription}
                             required
                         />
                     </div>
                 </div>
+                <button className='submit_btn' type='submit'>
+                    Créez votre annonce
+                </button>
             </form>
         </div>
     </>
