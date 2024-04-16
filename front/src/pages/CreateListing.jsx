@@ -23,18 +23,7 @@ function CreateListing() {
     })
 
      // State for error messages
-    const [errorMessages, setErrorMessages] = useState({
-        category: "",
-        type: "",
-        adress: "",
-        postalCode: "",
-        city: "",
-        region: "",
-        country: "",
-        title: "", 
-        description:"",
-        price:""
-    });
+    const [errorMessages, setErrorMessages] = useState({});
 
     // Handlers for location input changes
     const handleChangeLocation = (e) => {
@@ -121,10 +110,6 @@ function CreateListing() {
 
         if (!type) {
             errors.type = "Veuillez sélectionner un type de logement.";
-        }
-
-        if (!formLocation.adress || !formLocation.postalCode || !formLocation.city || !formLocation.region || !formLocation.country || !formLocation.title || !formLocation.description || !formLocation.price) {
-            errors.type = "Veuillez remplir ce champ.";
         }
 
         if (amenities.length === 0) {
@@ -230,7 +215,6 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
-                                {errorMessages.adress && <p className="form_message-error">{errorMessages.adress}</p>}
                             </div>
                         </div>
                         <div className='create_listing-step-1-place-half'>
@@ -244,7 +228,6 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
-                                {errorMessages.postalCode && <p className="form_message-error">{errorMessages.postalCode}</p>}
                             </div>
                             <div className='create_listing-step-1-place-location'>
                                 <p>Ville</p>
@@ -256,7 +239,6 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
-                                {errorMessages.city && <p className="form_message-error">{errorMessages.city}</p>}
                             </div>
                         </div>
                         <div className='create_listing-step-1-place-half'>
@@ -270,7 +252,6 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
-                                {errorMessages.region && <p className="form_message-error">{errorMessages.region}</p>}
                             </div>
                             <div className='create_listing-step-1-place-location'>
                                 <p>Pays</p>
@@ -282,7 +263,6 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
-                                {errorMessages.country && <p className="form_message-error">{errorMessages.country}</p>}
                             </div>
                         </div>
                     </div>
@@ -423,7 +403,6 @@ function CreateListing() {
                             onChange={handleChangeDescription}
                             required
                         />
-                        {errorMessages.title && <p className="form_message-error">{errorMessages.title}</p>}
                         <p>Description</p>
                         <textarea
                             name="description" 
@@ -432,7 +411,6 @@ function CreateListing() {
                             onChange={handleChangeDescription}
                             required
                         />
-                        {errorMessages.description && <p className="form_message-error">{errorMessages.description}</p>}
                         <p>Prix / €</p>
                         <input 
                             type="number"
@@ -442,7 +420,6 @@ function CreateListing() {
                             onChange={handleChangeDescription}
                             required
                         />
-                        {errorMessages.price && <p className="form_message-error">{errorMessages.price}</p>}
                     </div>
                 </div>
                 <div className='create_listing-button'>
