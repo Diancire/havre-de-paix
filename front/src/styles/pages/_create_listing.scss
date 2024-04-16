@@ -14,8 +14,8 @@
     border-radius: 20px;
     margin: 40px 0;
     h2 {
-        color: $accent-color-green-light;
-        border-bottom: 2px solid $accent-color-green-light;
+        color: $primary-color-green-darken;
+        border-bottom: 2px solid $primary-color-green-darken;
         padding: 40px 0 20px;
     }
     h3 {
@@ -55,13 +55,11 @@
             color: $black;
         }
         &:hover {
-            border: 2px solid $accent-color-green-light;
-            background-color: $lightgrey;
+            border: 2px solid $secondary-color-yellow;
         }
     }
     .selected {
-        border: 2px solid $accent-color-green-light;
-        background-color: $lightgrey;
+        border: 2px solid $secondary-color-yellow;
     }
 }
 
@@ -88,13 +86,11 @@
             font-size: 30px;
         }
         &:hover {
-            border: 2px solid $accent-color-green-light;
-            background-color: $lightgrey;
+            border: 2px solid $secondary-color-yellow;
         }
     }
     .selected {
-        border: 2px solid $accent-color-green-light;
-        background-color: $lightgrey;
+        border: 2px solid $secondary-color-yellow;
     }
 }
 
@@ -124,7 +120,7 @@
             font-size: 16px;
             width: -webkit-fill-available;
             &:focus {
-                outline: 2px solid $accent-color-green-light;
+                outline: 2px solid $primary-color-green;
                 border: none;
             }
         }
@@ -182,13 +178,11 @@
             text-align: center;
         }
         &:hover {
-            border: 2px solid $accent-color-green-light;
-            background-color: $lightgrey;
+            border: 2px solid $secondary-color-yellow;
         }
     }
     .selected {
-        border: 2px solid $accent-color-green-light;
-        background-color: $lightgrey;
+        border: 2px solid $secondary-color-yellow;
     }
 }
 
@@ -253,8 +247,13 @@
             width: -webkit-fill-available;
         }
         &:focus {
-            outline: 2px solid $accent-color-green-light;
+            outline: 2px solid $primary-color-green;
             border: none;
         }
     }
+}
+
+.create_listing-button {
+    display: flex;
+    justify-content: center;
 }

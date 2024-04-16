@@ -18,6 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 /* CREATE LISTING */
+// Create a new listing
 router.post("/create", upload.array("listingPhotos"), async (req, res) => {
     try{
         const { 
@@ -34,24 +35,23 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
             bedCount, 
             bathroomCount, 
             amenities, 
-            listingPhotoPaths, 
             title, 
             description, 
             price 
         } = req.body;
 
-        const user = await User.findById(userId)
-
+        // Check if any files were uploaded
         const listingPhotos = req.files
         if(!listingPhotos) {
             return res.status(400).send("Aucun fichier téléchargé.")
         }
 
-        const listinPhotoPaths = listingPhotos.map((file) => file.path)
+        // Extract file paths from the uploaded files
+        const listingPhotoPaths = listingPhotos.map((file) => file.path)
 
+        // Create a new listing with the provided data
         const newListing = new Listing({
             creator,
-            firstName: user.firstName,
             category, 
             type,
             adress, 
@@ -70,8 +70,10 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
             price 
         })
 
+        // Save the new listing to the database
         await newListing.save()
 
+        // Respond with the newly created listing
         res.status(200).json(newListing)
     } catch (err){
         res.status(409).json({ message: "Echec de la création d'annonce", error: err.message})
@@ -80,16 +82,20 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
 })
 
 /* GET LISTINGS */
+// Retrieve all listings or those of a specific category
 router.get("/", async (req, res) => {
     const qCategory = req.query.category
     try {
         let listings
         if(qCategory) {
+            // If a category query parameter is provided, retrieve listings of that category
             listings = await Listing.find({ category: qCategory }).populate("creator")
         } else {
+            // Otherwise, retrieve all listings
             listings = await Listing.find()
         }
 
+        // Respond with the retrieved listings
         res.status(200).json(listings)
 
     } catch (err) {

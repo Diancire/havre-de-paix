@@ -5,6 +5,7 @@ import { IoMdRemoveCircleOutline, IoMdAddCircleOutline, IoIosImages, IoIosTrash}
 import { DragDropContext, Draggable, Droppable} from "react-beautiful-dnd"
 import { useSelector} from "react-redux"
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 function CreateListing() {
 
@@ -20,6 +21,22 @@ function CreateListing() {
         country: "", 
 
     })
+
+     // State for error messages
+    const [errorMessages, setErrorMessages] = useState({
+        category: "",
+        type: "",
+        adress: "",
+        postalCode: "",
+        city: "",
+        region: "",
+        country: "",
+        title: "", 
+        description:"",
+        price:""
+    });
+
+    // Handlers for location input changes
     const handleChangeLocation = (e) => {
         const { name, value } = e.target
         setFormLocation({
@@ -34,9 +51,10 @@ function CreateListing() {
     const [bedCount, setBedCount] = useState(1)
     const [bathroomCount, setBathroomCount] = useState(1)
 
-    // Equipments
+    // State variable for amenities
     const [amenities, setAmenities] = useState([]);
 
+    // Handler for selecting amenities
     const handleSelectAmenities = (equipment) => {
         if(amenities.includes(equipment)) {
             setAmenities((prevAmenities) => prevAmenities.filter((option) => option !== equipment))
@@ -69,12 +87,14 @@ function CreateListing() {
         );
     };
 
+    // State variables for description
     const [formDescription, setFormDescritpion] = useState({
         title: "",
         description:"",
         price: 0,
     })
 
+    // Handler for description input changes
     const handleChangeDescription = (e) => {
         const { name, value } = e.target
         setFormDescritpion({
@@ -83,12 +103,40 @@ function CreateListing() {
         })
     }
 
+    // Retrieve creator ID from Redux store
     const creatorId = useSelector((state) => state.user._id)
 
     const navigate = useNavigate()
 
+    // Handle form submission
     const handlePost = async (e) => {
         e.preventDefault()
+
+        const errors = {};
+
+        // Validation for required fields
+        if (!category) {
+            errors.category = "Veuillez sélectionner une catégorie.";
+        }
+
+        if (!type) {
+            errors.type = "Veuillez sélectionner un type de logement.";
+        }
+
+        if (!formLocation.adress || !formLocation.postalCode || !formLocation.city || !formLocation.region || !formLocation.country || !formLocation.title || !formLocation.description || !formLocation.price) {
+            errors.type = "Veuillez remplir ce champ.";
+        }
+
+        if (amenities.length === 0) {
+            errors.amenities = "Veuillez sélectionner des équipements.";
+        }
+
+        setErrorMessages(errors);
+
+        if (Object.keys(errors).length > 0) {
+            toast.error('Veuillez remplir correctement tous les champs du formulaire.');
+            return;
+        }
 
         try {
             /* Create a new formData object to handle file uploads */
@@ -121,6 +169,7 @@ function CreateListing() {
                 body: listingForm
             })
             if(response.ok) {
+                toast.success('Votre annonce a été créée avec succès!');
                 navigate("/")
             }
         } catch (err) {
@@ -150,6 +199,7 @@ function CreateListing() {
                         ))}
 
                     </div>
+                    {errorMessages.category && <p className="form_message-error">{errorMessages.category}</p>}
                     <h3>Quel type de logement les invités auront-ils ?</h3>
                     <div className='create_listing-step-1-type-list'>
                         {types?.map((item, index) =>(
@@ -166,6 +216,7 @@ function CreateListing() {
                             </div>
                         ))}
                     </div>
+                    {errorMessages.type && <p className="form_message-error">{errorMessages.type}</p>}
                     <h3>Où se trouve votre logement ?</h3>
                     <div className='create_listing-step-1-place'>
                         <div className='create_listing-step-1-place-full'>
@@ -179,6 +230,7 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
+                                {errorMessages.adress && <p className="form_message-error">{errorMessages.adress}</p>}
                             </div>
                         </div>
                         <div className='create_listing-step-1-place-half'>
@@ -192,6 +244,7 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
+                                {errorMessages.postalCode && <p className="form_message-error">{errorMessages.postalCode}</p>}
                             </div>
                             <div className='create_listing-step-1-place-location'>
                                 <p>Ville</p>
@@ -203,6 +256,7 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
+                                {errorMessages.city && <p className="form_message-error">{errorMessages.city}</p>}
                             </div>
                         </div>
                         <div className='create_listing-step-1-place-half'>
@@ -216,6 +270,7 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
+                                {errorMessages.region && <p className="form_message-error">{errorMessages.region}</p>}
                             </div>
                             <div className='create_listing-step-1-place-location'>
                                 <p>Pays</p>
@@ -227,6 +282,7 @@ function CreateListing() {
                                     onChange={handleChangeLocation}
                                     required
                                 />
+                                {errorMessages.country && <p className="form_message-error">{errorMessages.country}</p>}
                             </div>
                         </div>
                     </div>
@@ -297,6 +353,7 @@ function CreateListing() {
                             </div>
                         ))}
                     </div>
+                    {errorMessages.amenities && <p className="form_message-error">{errorMessages.amenities}</p>}
                     <h3>Ajoutez quelques photos de votre logement</h3>
                     <DragDropContext onDragEnd={handleDragPhoto}>
                         <Droppable droppableId="photos" direction="horizontal">
@@ -366,6 +423,7 @@ function CreateListing() {
                             onChange={handleChangeDescription}
                             required
                         />
+                        {errorMessages.title && <p className="form_message-error">{errorMessages.title}</p>}
                         <p>Description</p>
                         <textarea
                             name="description" 
@@ -374,6 +432,7 @@ function CreateListing() {
                             onChange={handleChangeDescription}
                             required
                         />
+                        {errorMessages.description && <p className="form_message-error">{errorMessages.description}</p>}
                         <p>Prix / €</p>
                         <input 
                             type="number"
@@ -383,11 +442,14 @@ function CreateListing() {
                             onChange={handleChangeDescription}
                             required
                         />
+                        {errorMessages.price && <p className="form_message-error">{errorMessages.price}</p>}
                     </div>
                 </div>
-                <button className='submit_btn' type='submit'>
-                    Créez votre annonce
-                </button>
+                <div className='create_listing-button'>
+                    <button className='btn btn_filled_yellow' type='submit'>
+                        Créez votre annonce
+                    </button>
+                </div>
             </form>
         </div>
     </>

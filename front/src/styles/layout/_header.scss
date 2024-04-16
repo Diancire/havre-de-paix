@@ -30,7 +30,7 @@
         color: $darkgrey;
         font-size: 20px;
         &:hover {
-            color: $accent-color-green-nuance-normal;
+            color: $primary-color-green-light;
         }
     }
     @include sm {
@@ -47,7 +47,7 @@
         cursor: pointer;
         color: $text-gray;
         &:hover {
-            color: $accent-color-green-nuance-normal;
+            color: $primary-color-green-light;
         }
     }
     .header_navbar_right_account {
@@ -72,7 +72,7 @@
             color: $darkgrey;
             font-size: 20px;
             &:hover {
-                color: $accent-color-green-nuance-normal;
+                color: $primary-color-green-light;
             }
         }
 

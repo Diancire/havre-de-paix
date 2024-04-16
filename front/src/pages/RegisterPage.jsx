@@ -218,7 +218,7 @@ const RegisterPage = () => {
               {(!photoSelected && formSubmitted) && (
                 <p className='form_message-error'>Veuillez ajouter une photo.</p>
               )}
-              <button type='submit' disabled={!passwordMatch}>S'inscrire</button>
+              <button type='submit' disabled={!passwordMatch} className='btn btn_filled_yellow'>S'inscrire</button>
             </form>
             {/* link to login */}
             <a href='/login'>Vous avez déjà un compte ? Connectez-vous ici</a>
