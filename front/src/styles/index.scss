@@ -4,9 +4,11 @@
 @import 'base/reset';
 @import 'base/base';
 @import 'components/buttons';
+@import 'components/loader';
 @import 'layout/header';
 @import 'layout/slide';
 @import 'layout/categories';
 @import 'pages/register';
 @import 'pages/login';
 @import 'pages/create_listing';
+@import 'pages/listings';

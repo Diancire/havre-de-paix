@@ -92,7 +92,7 @@ router.get("/", async (req, res) => {
             listings = await Listing.find({ category: qCategory }).populate("creator")
         } else {
             // Otherwise, retrieve all listings
-            listings = await Listing.find()
+            listings = await Listing.find().populate("creator")
         }
 
         // Respond with the retrieved listings
@@ -101,6 +101,17 @@ router.get("/", async (req, res) => {
     } catch (err) {
         res.status(404).json({ message: "Impossible de récupérer les annonces", error: err.message})
         console.log(err);
+    }
+})
+
+/* LISTING DETAILS */
+router.get("/:listingId", async (req, res) => {
+    try {
+        const { listingId } = req.params
+        const listing = await Listing.findById(listingId).populate("creator")
+        res.status(202).json(listing)
+    } catch (err) {
+        res.status(404).json({ message: "La liste est introuvable", error: err.message})
     }
 })
 
