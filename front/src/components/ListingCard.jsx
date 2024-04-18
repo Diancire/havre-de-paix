@@ -17,10 +17,12 @@ const ListingCard = ({
     // Slider for images
     const [currentIndex, setCurrentIndex] = useState(0)
 
-    const goToPrevSlide = () => {
+    const goToPrevSlide = (e) => {
+        e.stopPropagation();
         setCurrentIndex((prevIndex) => (prevIndex - 1 + listingPhotoPaths.length) % listingPhotoPaths.length)
     }
-    const goToNextSlide = () => {
+    const goToNextSlide = (e) => {
+        e.stopPropagation();
         setCurrentIndex((prevIndex) => (prevIndex + 1) % listingPhotoPaths.length)
     }
     const navigate = useNavigate();

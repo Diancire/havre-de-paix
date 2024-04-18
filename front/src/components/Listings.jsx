@@ -34,7 +34,6 @@ function Listings() {
         getFeedListings();
     }, [selectedCategory]);
 
-    console.log(listings);
 
   return (
     <>
@@ -61,6 +60,7 @@ function Listings() {
                         price
                         }) => (
                         <ListingCard
+                            key={_id}
                             listingId={_id}
                             creator={creator}
                             listingPhotoPaths={listingPhotoPaths}

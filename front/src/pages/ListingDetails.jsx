@@ -5,6 +5,7 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { DateRange} from 'react-date-range'
 import Loader from '../components/Loader'
+import Header from '../components/Header'
 
 function ListingDetails() {
   const [loading, setLoading] = useState(true)
@@ -31,7 +32,6 @@ function ListingDetails() {
     getListingDetails();
   }, [])
 
-  console.log(listing)
 
   // Booking calendar
   const [dateRange, setDateRange] = useState([
@@ -51,14 +51,11 @@ function ListingDetails() {
   const end = new Date(dateRange[0].endDate)
   const dayCount = Math.round(end - start) / (1000 * 60 * 60 * 24) // Calculate the difference in day unit
 
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
   return loading ? (
     <Loader/>
     ) : (
     <>
+      <Header/>
       <div className='listing_details_container'>
         <div className='listing_details-title'>
             <h1>{listing.title}</h1>
@@ -66,8 +63,8 @@ function ListingDetails() {
         </div>
         <div className='listing_details-photos'>
         {listing.listingPhotoPaths && listing.listingPhotoPaths.length > 0 ? (
-          listing.listingPhotoPaths.map((photo) => (
-            <img src={`http://localhost:3001/${photo.replace("public", "")}`} alt="listing photos" />
+          listing.listingPhotoPaths.map((photo, index) => (
+            <img src={`http://localhost:3001/${photo.replace("public", "")}`} alt="listing photos" key={index} />
           ))
         ) : (
           <img src="/assets/no-photo.png" alt="no photo" />
@@ -79,7 +76,7 @@ function ListingDetails() {
         <hr />
         <div className='listing_details-profile'>
             <img src={`http://localhost:3001/${listing.creator.profileImagePath && listing.creator.profileImagePath.replace("public", "")}`} alt="" />
-            <h3>Propriétaire: {capitalizeFirstLetter(listing.creator.firstName)} {capitalizeFirstLetter(listing.creator.lastName)}</h3>
+            <h3>Propriétaire: {listing.creator.firstName} {listing.creator.lastName}</h3>
         </div>
         <hr />
         <div className='listing_details-description'>
