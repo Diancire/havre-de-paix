@@ -14,6 +14,7 @@ function ListingDetails() {
 
   const [listing, setListing] = useState(null)
 
+  // Fetch listing details based on listingId
   const getListingDetails = async () => {
     try {
       const response = await fetch(`http://localhost:3001/properties/${listingId}`,
@@ -28,9 +29,10 @@ function ListingDetails() {
     }
   }
 
+  // Fetch listing details when component mounts
   useEffect(() => {
     getListingDetails();
-  }, [])
+  }, [getListingDetails])
 
 
   // Booking calendar
@@ -42,11 +44,13 @@ function ListingDetails() {
     }
   ])
 
+  // Handle date selection
   const handleSelect = (ranges) => {
     // Update the selected date range when user makes a selection
     setDateRange([ranges.selection])
   }
 
+  // Calculate total days for booking
   const start = new Date(dateRange[0].startDate)
   const end = new Date(dateRange[0].endDate)
   const dayCount = Math.round(end - start) / (1000 * 60 * 60 * 24) // Calculate the difference in day unit
@@ -64,10 +68,10 @@ function ListingDetails() {
         <div className='listing_details-photos'>
         {listing.listingPhotoPaths && listing.listingPhotoPaths.length > 0 ? (
           listing.listingPhotoPaths.map((photo, index) => (
-            <img src={`http://localhost:3001/${photo.replace("public", "")}`} alt="listing photos" key={index} />
+            <img src={`http://localhost:3001/${photo.replace("public", "")}`} alt="listing" key={index} />
           ))
         ) : (
-          <img src="/assets/no-photo.png" alt="no photo" />
+          <img src="/assets/no-photo.png" alt="not available" />
         )}
         </div>
         <hr />

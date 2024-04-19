@@ -17,6 +17,7 @@ const ListingCard = ({
     // Slider for images
     const [currentIndex, setCurrentIndex] = useState(0)
 
+    // Functions to navigate through images
     const goToPrevSlide = (e) => {
         e.stopPropagation();
         setCurrentIndex((prevIndex) => (prevIndex - 1 + listingPhotoPaths.length) % listingPhotoPaths.length)
@@ -25,6 +26,7 @@ const ListingCard = ({
         e.stopPropagation();
         setCurrentIndex((prevIndex) => (prevIndex + 1) % listingPhotoPaths.length)
     }
+    // Navigation hook to redirect to listing details
     const navigate = useNavigate();
 
   return (
@@ -34,7 +36,7 @@ const ListingCard = ({
                 {listingPhotoPaths && listingPhotoPaths.length > 0 ? (
                     listingPhotoPaths.map((photo, index) => (
                         <div className='listings_card-slider-content-item' key={index}>
-                            <img src={`http://localhost:3001/${photo.replace("public", "")}`} alt={`photo listing ${index + 1}`} />
+                            <img src={`http://localhost:3001/${photo.replace("public", "")}`} alt={`listing ${index + 1}`} />
                             <div className='listings_card-slider-content-item-prev-button' onClick={(e) => {goToPrevSlide(e)}}>
                                 <IoIosArrowDropleft/>
                             </div>
@@ -45,7 +47,7 @@ const ListingCard = ({
                     ))
                 ): (
                     <div className='listings_card-slider-content-item'>
-                        <img src="/assets/no-photo.png" alt="no photo" />
+                        <img src="/assets/no-photo.png" alt="not available" />
                     </div>
 
                 )}
