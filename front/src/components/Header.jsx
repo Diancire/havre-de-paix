@@ -53,7 +53,7 @@ const Header = () => {
                         <Link to="">Liste de souhaits</Link>
                         <Link to="">Liste de propriétés</Link>
                         <Link to="">Liste de réservations</Link>
-                        <Link to="">Publier une annonce</Link>
+                        <Link to="/create-listing">Publier une annonce</Link>
 
 
                         <Link to="/" onClick={() => {dispatch(setLogout())}}>Deconnexion</Link>

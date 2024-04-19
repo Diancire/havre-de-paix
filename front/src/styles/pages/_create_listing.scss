@@ -1,0 +1,259 @@
+.create_listing_container {
+    padding: 40px 20px;
+    background-color: $lightgrey;
+
+    h1 {
+        color: $primary-color-green;
+        text-align: center;
+    }
+}
+
+.create_listing-step-1,  .create_listing-step-2{
+    background-color: $white;
+    padding: 30px 20px;
+    border-radius: 20px;
+    margin: 40px 0;
+    h2 {
+        color: $primary-color-green-darken;
+        border-bottom: 2px solid $primary-color-green-darken;
+        padding: 40px 0 20px;
+    }
+    h3 {
+        padding: 40px 0 20px;
+    }
+}
+
+.create_listing-step-1-category-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+
+    @include md {
+        padding: 0;
+    }
+    .create_listing-step-1-category-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 110px;
+        height: 90px;
+        border: 2px solid $grey;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 10px;
+        &-icon {
+            font-size: 30px;
+            color: $black;
+        }
+        p {
+            font-weight: 600;
+            text-align: center;
+            color: $black;
+        }
+        &:hover {
+            border: 2px solid $secondary-color-yellow;
+        }
+    }
+    .selected {
+        border: 2px solid $secondary-color-yellow;
+    }
+}
+
+.create_listing-step-1-type-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .create_listing-step-1-type-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 600px;
+        padding: 15px 30px;
+        border: 2px solid $grey;
+        border-radius: 10px;
+        cursor: pointer;
+        &-text {
+            max-width: 400px;
+            h4 {
+                padding-bottom: 5px;
+            }
+        }
+        &-icon {
+            font-size: 30px;
+        }
+        &:hover {
+            border: 2px solid $secondary-color-yellow;
+        }
+    }
+    .selected {
+        border: 2px solid $secondary-color-yellow;
+    }
+}
+
+.create_listing-step-1-place {
+    &-full {
+        max-width: 700px;
+    }
+    &-half {
+        max-width: 700px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        @include ml {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+    &-location {
+        p {
+            font-weight: 700;
+        }
+        input {
+            border: 1px solid $grey;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            width: -webkit-fill-available;
+            &:focus {
+                outline: 2px solid $primary-color-green;
+                border: none;
+            }
+        }
+    }
+}
+
+.create_listing-step-1-basics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    &-item {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        padding: 15px;
+        border: 1px solid $grey;
+        border-radius: 10px;
+        p {
+            font-weight: 600;
+        }
+        &-count {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 20px;
+        }
+    }
+}
+
+.create_listing-step-2-equipments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    &-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 90px;
+        border: 2px solid $grey;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 10px;
+        @include sm {
+            width: 100%;
+        }
+        &-icon {
+            font-size: 30px;
+        }
+        p {
+            font-weight: 600;
+            text-align: center;
+        }
+        &:hover {
+            border: 2px solid $secondary-color-yellow;
+        }
+    }
+    .selected {
+        border: 2px solid $secondary-color-yellow;
+    }
+}
+
+.create_listing-step-2-photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    input {
+        display: none;
+    }
+    &-item {
+        position: relative;
+        width: 250px;
+        height: 150px;
+        cursor: move;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 3px;
+            border: none;
+            background-color: $white;
+            font-size: 20px;
+            cursor: pointer;
+            &:hover {
+                color: $red;
+            }
+        }
+    }
+    label {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border: 1px dashed $grey;
+        width: 250px;
+        height: 150px;
+        svg {
+            font-size: 60px;
+        }
+        p {
+            text-align: center;
+            font-weight: 600;
+        }
+    }
+}
+
+.create_listing-step-2-description {
+    input, textarea {
+        border: 1px solid $grey;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 16px;
+        width: 500px;
+        font-family: $font-body;
+        @include md {
+            width: -webkit-fill-available;
+        }
+        &:focus {
+            outline: 2px solid $primary-color-green;
+            border: none;
+        }
+    }
+}
+
+.create_listing-button {
+    display: flex;
+    justify-content: center;
+}

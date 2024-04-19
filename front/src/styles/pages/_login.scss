@@ -75,16 +75,6 @@
             font-size: 50px;
         }
     }
-    button {
-        margin-top: 15px;
-        color: $white;
-        background-color:#32A65A;
-        @include btn;
-        &:hover {
-            background-color: #C1E4CD;
-            color:#32A65A;
-        }
-      }
 }
 
 .login_form-control {

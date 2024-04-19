@@ -88,7 +88,7 @@ export const LoginPage = () => {
               }
           </div>
           {errorMessage && <p className="form_message-error">{errorMessage}</p>}
-          <button type='submit'>Se connecter</button>
+          <button type='submit' className='btn btn_filled_yellow'>Se connecter</button>
         </form>
         <a href="/register">Vous n'avez pas de compte ? S'inscrire</a>
       </div>

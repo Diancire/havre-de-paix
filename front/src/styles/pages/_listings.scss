@@ -1,0 +1,203 @@
+.listings_category {
+    padding: 50px 80px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 60px;
+    @include sm {
+        padding: 50px 20px;
+    }
+    &-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: $darkgrey;
+        &-icon {
+            font-size: 30px;
+        }
+        &-text {
+            font-weight: 700;
+        }
+        &:hover {
+            color: $secondary-color-yellow;
+        }
+    }
+    .selected {
+        color: $secondary-color-yellow;
+    }
+}
+
+.listings_content {
+    padding: 0 60px 120px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    @include lg {
+        padding: 0 20px 120px;
+    }
+}
+
+.listings_card {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid $primary-color-grey-light;
+    &:hover {
+        @include shadow;
+    }
+    h3 {
+        font-size: 17px;
+    }
+    p {
+        padding: 0;
+        padding-top: 5px;
+        span {
+            font-weight: 700;
+        }
+    }
+}
+
+.listings_card-slider-container {
+    width: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    .listings_card-slider-content {
+        display: flex;
+        transition: transform 0.5s ease;
+        &-item {
+            position: relative;
+            width: 100%;
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: 100%;
+            height: 270px;
+            display: flex;
+            align-items: center;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+            &-prev-button, &-next-button {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                padding: 6px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: $white;
+                z-index: 9999;
+                svg {
+                    font-size: 30px;
+                }
+                &:hover {
+                    color: $secondary-color-yellow;
+                }
+            }
+            &-prev-button {
+                left: 10px;
+            }
+            &-next-button {
+                right: 10px;
+            }
+        }
+    }
+}
+
+.listing_details_container {
+    padding: 40px 130px 120px;
+    @include xl {
+        padding: 40px 80px 120px;
+    }
+
+    @include lg {
+    padding: 40px 50px 120px;
+    }
+
+    @include sm {
+    padding: 40px 20px 120px;
+    }
+    hr {
+        margin: 20px 0;
+    }
+}
+
+.listing_details-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include sm {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    h1 {
+        font-size: 45px;
+    }
+}
+
+.listing_details-photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+    img {
+        max-width: 280px;
+        max-height: 200px;
+    }
+
+}
+
+.listing_details-profile {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+    }
+}
+
+.listing_details-booking {
+    display: flex;
+    justify-content: space-between;
+    @include lg {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .listing_details-equipment {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 100px;
+        margin: 30px 0;
+        max-width: 700px;
+        @include sm {
+            grid-column-gap: 20px;
+        }
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            &-icon {
+                font-size: 30px;
+            }
+        }
+
+    }
+    .listing_details-date {
+        &-calendar {
+            margin: 30px 0;
+            h2 {
+                padding-bottom: 10px;
+            }
+        }
+    }
+}
