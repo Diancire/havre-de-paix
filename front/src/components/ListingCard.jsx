@@ -11,7 +11,11 @@ const ListingCard = ({
     country,
     category,
     type,
-    price
+    price, 
+    startDate, 
+    endDate, 
+    totalPrice,
+    booking
 }) =>{
 
     // Slider for images
@@ -28,6 +32,20 @@ const ListingCard = ({
     }
     // Navigation hook to redirect to listing details
     const navigate = useNavigate();
+
+    // Function to format dates in French with the first letter of the month in uppercase
+    const formatDateFrench = (dateString) => {
+        // Options for formatting the date
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        // Creating a Date object from the provided date string
+        const date = new Date(dateString);
+        // Getting the full name of the month in French and capitalizing the first letter
+        const month = date.toLocaleDateString('fr-FR', { month: 'long' }).replace(/^\w/, (c) => c.toUpperCase());
+        // Formatting the date with the specified options
+        const formattedDate = date.toLocaleDateString('fr-FR', options);
+        // Replacing the month in the formatted date with the capitalized month
+        return formattedDate.replace(date.toLocaleDateString('fr-FR', { month: 'long' }), month);
+    };
 
   return (
     <div className='listings_card' onClick={() => {navigate(`/properties/${listingId}`)}}>
@@ -55,8 +73,13 @@ const ListingCard = ({
         </div>
         <h3>{city}, {region}, {country}</h3>
         <p>{category}</p>
-        <p>{type}</p>
-        <p><span>{price}€</span> par nuit</p>
+        {!booking ? (<>        
+            <p>{type}</p>
+            <p><span>{price}€</span> par nuit</p>
+        </>):(<>
+            <p>{formatDateFrench(startDate)} - {formatDateFrench(endDate)}</p>
+            <p><span>{totalPrice}€</span></p>
+        </>)}
     </div>
   )
 }

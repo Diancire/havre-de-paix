@@ -158,7 +158,7 @@ function CreateListing() {
                 navigate("/")
             }
         } catch (err) {
-            console.log("Publish listing failed", err.message);
+            console.log("Échec de la publication de l'annonce.", err.message);
         }
     }
 

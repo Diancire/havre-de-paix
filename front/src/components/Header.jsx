@@ -49,7 +49,7 @@ const Header = () => {
                 {/* Dropdown menu for logged-in users */}
                 {dropdownMenu && user && (
                     <div className='header_navbar_right-accountmenu'>
-                        <Link to="">Liste de voyages</Link>
+                        <Link to={`/${user._id}/trips`}>Liste de voyages</Link>
                         <Link to="">Liste de souhaits</Link>
                         <Link to="">Liste de propriétés</Link>
                         <Link to="">Liste de réservations</Link>
