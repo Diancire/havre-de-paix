@@ -1,0 +1,14 @@
+.trip-list_container {
+    margin: 20px;
+    h1 {
+        margin: 40px 50px;
+        color: $primary-color-green;
+    }
+    .trip-list-element {
+        padding: 0 100px 120px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+}

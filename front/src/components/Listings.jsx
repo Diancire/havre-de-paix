@@ -64,7 +64,8 @@ function Listings() {
                         country,
                         category,
                         type,
-                        price
+                        price,
+                        booking=false
                         }) => (
                         <ListingCard
                             key={_id}
@@ -77,6 +78,7 @@ function Listings() {
                             category={category}
                             type={type}
                             price={price}
+                            booking={booking}
                         />
                     ))}
 

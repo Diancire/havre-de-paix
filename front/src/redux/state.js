@@ -16,15 +16,21 @@ export const userSlice = createSlice ({
             state.user = action.payload.user
             state.token = action.payload.token
         },
+        // Action to update user logout state
         setLogout: (state) => {
             state.user = null
             state.token = null
         },
+        // Action to update listings state
         setListings: (state, action) => {
             state.listings = action.payload.listings
+        },
+        // Action to update tripList state nested under user state
+        setTripList: (state, action) => {
+            state.user.tripList = action.payload
         }
     }
 })
 
-export const { setLogin, setLogout, setListings } = userSlice.actions
+export const { setLogin, setLogout, setListings, setTripList } = userSlice.actions
 export default userSlice.reducer

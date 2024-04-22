@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState, useCallback } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import { equipments } from '../data'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { DateRange} from 'react-date-range'
 import Loader from '../components/Loader'
 import Header from '../components/Header'
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function ListingDetails() {
   const [loading, setLoading] = useState(true)
@@ -15,7 +17,7 @@ function ListingDetails() {
   const [listing, setListing] = useState(null)
 
   // Fetch listing details based on listingId
-  const getListingDetails = async () => {
+  const getListingDetails = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:3001/properties/${listingId}`,
       {
@@ -27,7 +29,7 @@ function ListingDetails() {
     } catch (err){
       console.log("Échec de la récupération des détails de l'annonce", err.message);
     }
-  }
+  }, [listingId]);
 
   // Fetch listing details when component mounts
   useEffect(() => {
@@ -54,6 +56,41 @@ function ListingDetails() {
   const start = new Date(dateRange[0].startDate)
   const end = new Date(dateRange[0].endDate)
   const dayCount = Math.round(end - start) / (1000 * 60 * 60 * 24) // Calculate the difference in day unit
+
+  // Submit booking
+  // Retrieving the customer ID from Redux state
+  const customerId = useSelector((state) => state?.user?._id)
+
+  const navigate = useNavigate()
+
+  // Function to handle form submission
+  const handleSubmit = async () => {
+    try {
+      // Creating a booking form object with required data
+      const bookingForm = {
+        customerId, 
+        hostId: listing.creator._id, 
+        listingId, 
+        startDate: dateRange[0].startDate.toDateString(), 
+        endDate: dateRange[0].endDate.toDateString(), 
+        totalPrice: listing.price * dayCount,
+      }
+      // Sending a POST request to create a new booking
+      const response = await fetch("http://localhost:3001/bookings/create", {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json", 
+        }, 
+        body: JSON.stringify(bookingForm) // Converting bookingForm to JSON string
+      })
+      if (response.ok) {
+        toast.success('Réservation réussie !');
+        navigate(`/${customerId}/trips`)
+      }
+    } catch (err) {
+      console.log("Échec de l'envoi de la réservation.", err.message);
+    }
+  }
 
   return loading ? (
     <Loader/>
@@ -116,7 +153,7 @@ function ListingDetails() {
               <h2>Prix total: {listing.price * dayCount} €</h2>
               <p>Date de début: {dateRange[0].startDate.toLocaleDateString('fr-FR', {weekday: 'long'}).charAt(0).toUpperCase() + dateRange[0].startDate.toLocaleDateString('fr-FR', {weekday: 'long'}).slice(1)}, {dateRange[0].startDate.toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}).replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</p>
               <p>Date de fin: {dateRange[0].endDate.toLocaleDateString('fr-FR', {weekday: 'long'}).charAt(0).toUpperCase() + dateRange[0].endDate.toLocaleDateString('fr-FR', {weekday: 'long'}).slice(1)}, {dateRange[0].endDate.toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}).replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</p>
-              <button className='btn btn_filled_yellow' type='submit'>Réserver</button>
+              <button className='btn btn_filled_yellow' type='submit' onClick={handleSubmit}>Réserver</button>
             </div>
           </div>
         </div>
