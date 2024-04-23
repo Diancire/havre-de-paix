@@ -3,6 +3,10 @@
     h1 {
         margin: 40px 50px;
         color: $primary-color-green;
+        @include mm {
+            text-align: center;
+            margin: 40px 25px;
+        }
     }
     .trip-list-element, .wish-list_element {
         padding: 0 100px 120px;

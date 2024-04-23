@@ -11,34 +11,38 @@ function WishList() {
         <Header/>
         <div className='wish-list_container'>
           <h1>Votre liste de souhait</h1>
-          <div className='wish-list_element'>
-            {wishList?.map(({ 
-              _id,
-              creator,
-              listingPhotoPaths, 
-              city, 
-              region, 
-              country, 
-              category, 
-              type, 
-              price, 
-              booking = false 
-            }) => (
-              <ListingCard 
-                listingId={_id}
-                creator={creator}
-                listingPhotoPaths={listingPhotoPaths}
-                city={city}
-                region={region}
-                country={country}
-                category={category}
-                type={type}
-                price={price}
-                booking={booking}
-              />
-              )
-            )}
-          </div>
+          {wishList.length === 0 ? (
+            <p className='text-center'>Vous n'avez aucune liste de souhaits pour le moment.</p>
+          ):(
+            <div className='wish-list_element'>
+              {wishList?.map(({ 
+                _id,
+                creator,
+                listingPhotoPaths, 
+                city, 
+                region, 
+                country, 
+                category, 
+                type, 
+                price, 
+                booking = false 
+              }) => (
+                <ListingCard 
+                  listingId={_id}
+                  creator={creator}
+                  listingPhotoPaths={listingPhotoPaths}
+                  city={city}
+                  region={region}
+                  country={country}
+                  category={category}
+                  type={type}
+                  price={price}
+                  booking={booking}
+                />
+                )
+              )}
+            </div>
+          )}
         </div>
     </>
   )

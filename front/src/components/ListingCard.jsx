@@ -3,6 +3,7 @@ import { IoIosArrowDropleft, IoIosArrowDropright, IoMdHeart, IoMdHeartEmpty } fr
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setWishList } from '../redux/state'
+import { toast } from 'react-toastify';
 
 const ListingCard = ({
     listingId, 
@@ -79,6 +80,7 @@ const ListingCard = ({
             // Dispatch a Redux action to update the wishlist in the Redux store with the updated data from the server
             dispatch(setWishList(data.wishList))
         } else {
+            toast.error('Vous ne pouvez pas ajouter votre propre annonce à votre liste de souhaits');
             return
         }
     }
