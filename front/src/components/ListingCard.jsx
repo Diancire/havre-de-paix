@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
+import { IoIosArrowDropleft, IoIosArrowDropright, IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { setWishList } from '../redux/state'
+import { toast } from 'react-toastify';
 
 const ListingCard = ({
     listingId, 
@@ -47,6 +50,42 @@ const ListingCard = ({
         return formattedDate.replace(date.toLocaleDateString('fr-FR', { month: 'long' }), month);
     };
 
+    // Add to wishlist
+
+    const dispatch = useDispatch(); 
+
+    // Select the user state from the Redux store
+    const user = useSelector((state) => state.user)
+
+    // Extract the user's wishlist from the user state, or initialize an empty array if it doesn't exist
+    const wishList = user?.wishList || [];
+
+    // Check if the current item is present in the user's wishlist
+    const isLiked = wishList?.find((item) => item?._id === listingId);
+
+    // Asynchronous function to update the wishlist on the server and in the Redux store
+    const patchWishList = async () => {
+        // Check if the current user is different from the creator of the listing
+        if(user?._id !== creator._id) {
+            const response = await fetch(`http://localhost:3001/users/${user?._id}/${listingId}`,
+            {
+                method:"PATCH",
+                header: {
+                    "Content-Type": "application/json"
+                }
+            }
+            );
+            const data = await response.json();
+
+            // Dispatch a Redux action to update the wishlist in the Redux store with the updated data from the server
+            dispatch(setWishList(data.wishList))
+        } else {
+            toast.error('Vous ne pouvez pas ajouter votre propre annonce à votre liste de souhaits');
+            return
+        }
+    }
+
+
   return (
     <div className='listings_card' onClick={() => {navigate(`/properties/${listingId}`)}}>
         <div className='listings_card-slider-container'>
@@ -80,6 +119,20 @@ const ListingCard = ({
             <p>{formatDateFrench(startDate)} - {formatDateFrench(endDate)}</p>
             <p><span>{totalPrice}€</span></p>
         </>)}
+        <button 
+            className={`listings_card-favorite ${isLiked ? 'listings_card-favorite-red' : ''}`}
+            onClick={(e) => {
+                e.stopPropagation(); 
+                patchWishList();
+            }} 
+            disabled={!user}
+        >
+            {isLiked ? (
+                <IoMdHeart/>
+                ):(
+                <IoMdHeartEmpty/>
+            )}
+        </button>
     </div>
   )
 }
