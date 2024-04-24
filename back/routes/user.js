@@ -66,4 +66,18 @@ router.get("/:userId/properties", async (req, res) => {
     }
 })
 
+/* GET  RESERVATION LIST */
+router.get("/:userId/reservations", async (req, res) => {
+    try {
+        // Extracting the userId from the request parameters
+        const { userId } = req.params
+        // Finding all bookings associated with the provided hostId (userId)
+        // Populating the customerId, hostId, and listingId fields with their respective document data
+        const reservations = await Booking.find({ hostId: userId }).populate("customerId hostId listingId")
+        res.status(202).json(reservations)
+    } catch (err) {
+        res.status(404).json({ message: "Impossible de trouver les listes de réservations", error: err.message})
+    }
+})
+
 module.exports = router

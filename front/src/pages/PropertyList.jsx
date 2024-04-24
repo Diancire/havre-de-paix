@@ -46,12 +46,12 @@ function PropertyList() {
     ) : (
         <>
             <Header/>
-            <div className='wish-list_container'>
+            <div className='property-list_container'>
             <h1>Votre liste de propriétés</h1>
             {propertyList.length === 0 ? (
                 <p className='text-center'>Vous n'avez aucune liste de propriétés pour le moment.</p>
             ):(
-                <div className='wish-list_element'>
+                <div className='property-list_element'>
                 {propertyList?.map(({ 
                     _id,
                     creator,

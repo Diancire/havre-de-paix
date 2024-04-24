@@ -42,7 +42,7 @@ function TripList() {
         <Header/>
         <div className='trip-list_container'>
           <h1 >Votre liste de voyages</h1>
-          <div className='trip-list-element'>
+          <div className='trip-list_element'>
             {tripList?.map(({listingId, hostId, startDate, endDate, totalPrice, booking=true}) => (
               <ListingCard 
                 key={listingId._id}
