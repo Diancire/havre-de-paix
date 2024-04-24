@@ -52,4 +52,18 @@ router.patch("/:userId/:listingId", async (req,res) => {
     }
 })
 
+/* GET  TRIP LIST */
+router.get("/:userId/properties", async (req, res) => {
+    try {
+        // Extracting the userId from the request parameters
+        const { userId } = req.params
+        // Finding all bookings associated with the provided customerId (userId)
+        // Populating the customerId, hostId, and listingId fields with their respective document data
+        const properties = await Listing.find({ creator: userId }).populate("creator")
+        res.status(202).json(properties)
+    } catch (err) {
+        res.status(404).json({ message: "Impossible de trouver les listes de propriétés", error: err.message})
+    }
+})
+
 module.exports = router

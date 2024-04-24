@@ -32,9 +32,13 @@ export const userSlice = createSlice ({
         // Action to update wishList state nested under user state
         setWishList: (state, action) => {
             state.user.wishList = action.payload
+        },
+        // Action to update propertyList state nested under user state
+        setPropertyList: (state, action) => {
+            state.user.propertyList = action.payload
         }
     }
 })
 
-export const { setLogin, setLogout, setListings, setTripList, setWishList } = userSlice.actions
+export const { setLogin, setLogout, setListings, setTripList, setWishList, setPropertyList } = userSlice.actions
 export default userSlice.reducer
