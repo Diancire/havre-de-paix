@@ -30,7 +30,7 @@ function Listings() {
                     dispatch(setListings({ listings: data }))
                     setLoading(false)
                 } catch (err) {
-                console.log("Fetch Listings Failed", err.message);
+                console.log("Échec de la récupération des annonces", err.message);
             }
         };
         // Calling function to fetch listings

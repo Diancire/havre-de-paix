@@ -10,7 +10,7 @@ function Categories() {
       <div className='categories_list'>
         {/* Mapping through categories to display them */}
         {categories?.slice(1,7).map((category, index) => (
-          <Link to="" key={index}>
+          <Link to={`/properties/category/${category.label}`} key={index}>
             <div className='categories_list-item'>
               <img src={category.img} alt={category.label} />
               <div className='categories_list-item-overlay'></div>

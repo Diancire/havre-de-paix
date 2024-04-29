@@ -52,7 +52,7 @@ const Header = () => {
                         <Link to={`/${user._id}/trips`}>Liste de voyages</Link>
                         <Link to={`/${user._id}/wishList`}>Liste de souhaits</Link>
                         <Link to={`/${user._id}/properties`}>Liste de propriétés</Link>
-                        <Link to="">Liste de réservations</Link>
+                        <Link to={`/${user._id}/reservations`}>Liste de réservations</Link>
                         <Link to="/create-listing">Publier une annonce</Link>
 
 
