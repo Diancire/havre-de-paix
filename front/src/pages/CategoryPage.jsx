@@ -5,6 +5,7 @@ import ListingCard from '../components/ListingCard'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setListings } from '../redux/state'
+import Footer from '../components/Footer'
 
 
 function CategoryPage() {
@@ -82,6 +83,7 @@ function CategoryPage() {
             </div>
           )}
         </div>
+        <Footer/>
     </>
   )
 }

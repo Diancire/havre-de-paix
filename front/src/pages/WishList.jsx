@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import Header from '../components/Header'
 import ListingCard from '../components/ListingCard'
+import Footer from '../components/Footer'
 
 function WishList() {
     // Retrieve the wishlist from the Redux store using the useSelector hook
@@ -44,6 +45,7 @@ function WishList() {
             </div>
           )}
         </div>
+        <Footer/>
     </>
   )
 }

@@ -79,10 +79,20 @@ const ListingCard = ({
 
             // Dispatch a Redux action to update the wishlist in the Redux store with the updated data from the server
             dispatch(setWishList(data.wishList))
+            toast.success('L\'annonce a été ajoutée à votre liste de souhaits');
         } else {
             toast.error('Vous ne pouvez pas ajouter votre propre annonce à votre liste de souhaits');
             return
         }
+    }
+
+    const handleAddToWishlist = (e) => {
+        e.stopPropagation(); 
+        if (!user) {
+            toast.error('Vous devez être connecté pour ajouter une annonce à votre liste de souhaits');
+            return;
+        }
+        patchWishList();
     }
 
 
@@ -121,11 +131,8 @@ const ListingCard = ({
         </>)}
         <button 
             className={`listings_card-favorite ${isLiked ? 'listings_card-favorite-red' : ''}`}
-            onClick={(e) => {
-                e.stopPropagation(); 
-                patchWishList();
-            }} 
-            disabled={!user}
+            onClick={handleAddToWishlist} 
+            // disabled={!user}
         >
             {isLiked ? (
                 <IoMdHeart/>

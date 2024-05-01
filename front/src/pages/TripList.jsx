@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import ListingCard from '../components/ListingCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTripList } from '../redux/state'
+import Footer from '../components/Footer'
 
 function TripList() {
     const [loading, setLoading] = useState(true)
@@ -66,6 +67,7 @@ function TripList() {
             </div>
           )}
         </div>
+        <Footer/>
     </>
   )
 }
