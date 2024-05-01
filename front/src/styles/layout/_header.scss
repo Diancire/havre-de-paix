@@ -7,6 +7,18 @@
     @include sm {
         padding: 10px 20px;
     }
+    .logo {
+        font-family: $font-logo;
+        color: $black;
+        font-size: 30px;
+        font-weight: bolder;
+        @include md {
+            font-size: 25px;
+        }
+        @include mm {
+            font-size: 22px;
+        }
+    }
 }
 
 .header_search {
@@ -24,6 +36,12 @@
         &:focus {
             outline: 2px solid $primary-color-green;
             border: none;
+        }
+        @include md {
+            min-width: 150px;
+        }
+        @include mm {
+            min-width: 125px;
         }
     }
     svg {

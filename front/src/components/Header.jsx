@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { IoSearchSharp, IoMenuSharp, IoPersonSharp  } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux"
 import { setLogout } from '../redux/state';
@@ -13,20 +13,40 @@ const Header = () => {
 
     const dispatch = useDispatch();
 
+    const [search, setSearch] = useState("")
+
+    const navigate = useNavigate()
+
+    // Function to handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (search !== "") { // Check if search query is not empty
+            navigate(`/properties/search/${search}`);
+        }
+    }
+
     return (
         <header className='header_container'>
             {/* Logo */}
-            <a href="/">
-                LOGO
+            <a href="/" className='logo'>
+                Havre de Paix
             </a>
             {/* Search bar */}
-            <div className='header_search'>
+            <form onSubmit={handleSubmit} className='header_search'>
                 <input 
                     type="text"
                     placeholder='Recherche...' 
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                 />
-                <IoSearchSharp />
-            </div>
+                <IoSearchSharp 
+                    onClick={() => { 
+                        if (search !== "") { 
+                            navigate(`/properties/search/${search}`) 
+                        }
+                    }}
+                />
+            </form>
             {/* Right side of the navbar */}
             <nav className='header_navbar_right'>
                 <button className='header_navbar_right_account' onClick={() => setDropdownMenu(!dropdownMenu)}>

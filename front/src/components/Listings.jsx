@@ -55,7 +55,10 @@ function Listings() {
             </div>
             {loading ? <Loader/> : (
                 <div className='listings_content'>
-                    {listings?.map((
+                    {listings.length === 0 && selectedCategory !== "Tout" ? (
+                        <p>Aucun résultat trouvé.</p>
+                    ):(
+                        listings?.map((
                         {_id, 
                         creator, 
                         listingPhotoPaths,
@@ -80,8 +83,8 @@ function Listings() {
                             price={price}
                             booking={booking}
                         />
-                    ))}
-
+                    ))
+                    )}
                 </div>
             )}
         </div>
