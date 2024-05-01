@@ -81,7 +81,7 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
     }
 })
 
-/* GET LISTINGS */
+/* GET LISTINGS BY CATEGORY */
 // Retrieve all listings or those of a specific category
 router.get("/", async (req, res) => {
     const qCategory = req.query.category
@@ -98,6 +98,33 @@ router.get("/", async (req, res) => {
         // Respond with the retrieved listings
         res.status(200).json(listings)
 
+    } catch (err) {
+        res.status(404).json({ message: "Impossible de récupérer les annonces", error: err.message})
+        console.log(err);
+    }
+})
+
+/* GET LISTING BY SEARCH */
+router.get("/search/:search", async (req, res) => {
+    const { search } = req.params
+
+    try {
+        let listings = []
+        
+        if(search === "all") {
+            // If search term is "all", retrieve all listings and populate creator field
+            listings = await Listing.find().populate("creator")
+        } else {
+            // If search term is specific, perform a search based on category or title
+            listings = await Listing.find({
+                $or: [
+                    { category: {$regex: search, $options: "i"}},
+                    { title: {$regex: search, $options: "i"}},
+                ]
+            }).populate("creator")
+        }
+        // Send response with the retrieved listings
+        res.status(200).json(listings)
     } catch (err) {
         res.status(404).json({ message: "Impossible de récupérer les annonces", error: err.message})
         console.log(err);

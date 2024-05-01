@@ -42,25 +42,29 @@ function TripList() {
         <Header/>
         <div className='trip-list_container'>
           <h1 >Votre liste de voyages</h1>
-          <div className='trip-list_element'>
-            {tripList?.map(({listingId, hostId, startDate, endDate, totalPrice, booking=true}) => (
-              <ListingCard 
-                key={listingId._id}
-                listingId={listingId._id} 
-                creator={hostId._id}
-                listingPhotoPaths={listingId.listingPhotoPaths} 
-                city={listingId.city} 
-                region={listingId.region} 
-                country={listingId.country} 
-                category={listingId.category} 
-                startDate={startDate} 
-                endDate={endDate} 
-                totalPrice={totalPrice}
-                booking={booking}
-              />
-            ))}
+          {tripList.length === 0 ? (
+            <p className='text-center'>Vous n'avez aucune liste de voyages pour le moment.</p>
+          ):(
+            <div className='trip-list_element'>
+              {tripList?.map(({listingId, hostId, startDate, endDate, totalPrice, booking=true}) => (
+                <ListingCard 
+                  key={listingId._id}
+                  listingId={listingId._id} 
+                  creator={hostId._id}
+                  listingPhotoPaths={listingId.listingPhotoPaths} 
+                  city={listingId.city} 
+                  region={listingId.region} 
+                  country={listingId.country} 
+                  category={listingId.category} 
+                  startDate={startDate} 
+                  endDate={endDate} 
+                  totalPrice={totalPrice}
+                  booking={booking}
+                />
+              ))}
 
-          </div>
+            </div>
+          )}
         </div>
     </>
   )
