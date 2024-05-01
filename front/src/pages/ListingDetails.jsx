@@ -8,6 +8,7 @@ import Loader from '../components/Loader'
 import Header from '../components/Header'
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import Footer from '../components/Footer';
 
 function ListingDetails() {
   const [loading, setLoading] = useState(true)
@@ -158,6 +159,7 @@ function ListingDetails() {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   )
 }

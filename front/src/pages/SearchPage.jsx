@@ -5,6 +5,7 @@ import { setListings } from '../redux/state'
 import Loader from '../components/Loader'
 import Header from '../components/Header'
 import ListingCard from '../components/ListingCard'
+import Footer from '../components/Footer'
 
 
 function SearchPage() {
@@ -74,6 +75,7 @@ function SearchPage() {
                 </div>
               )}
             </div>
+            <Footer/>
         </>
     )
 }

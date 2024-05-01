@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import ListingCard from '../components/ListingCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { setReservationList } from '../redux/state'
+import Footer from '../components/Footer'
 
 function ReservationList() {
     const [loading, setLoading] = useState(true)
@@ -64,6 +65,7 @@ function ReservationList() {
             </div>
           )}
         </div>
+        <Footer/>
     </>
   )
 }

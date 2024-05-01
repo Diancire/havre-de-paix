@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import ListingCard from '../components/ListingCard'
 import { setPropertyList } from '../redux/state'
 import Loader from '../components/Loader'
+import Footer from '../components/Footer'
 
 function PropertyList() {
 
@@ -81,6 +82,7 @@ function PropertyList() {
                 </div>
             )}
             </div>
+            <Footer/>
         </>
   )
 }

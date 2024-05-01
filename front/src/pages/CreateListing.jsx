@@ -6,6 +6,7 @@ import { DragDropContext, Draggable, Droppable} from "react-beautiful-dnd"
 import { useSelector} from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
+import Footer from '../components/Footer'
 
 function CreateListing() {
 
@@ -429,6 +430,7 @@ function CreateListing() {
                 </div>
             </form>
         </div>
+        <Footer/>
     </>
   )
 }
